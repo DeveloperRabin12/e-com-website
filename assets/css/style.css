@@ -169,3 +169,13 @@ nav{
 .product:hover img{
     opacity: 0.7;
 }
+
+footer{
+    background-color: black;
+}
+
+footer h5{
+    color: white;
+    font-weight: 700;
+    padding: 1rem 0;
+}
