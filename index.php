@@ -29,17 +29,17 @@
                 <a class="nav-link" href="shop.html">Shop</a>
               </li>
 
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Blog</a>
+              </li> -->
+
+              <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-              </li>
-
-              <li class="nav-item">
-                <i class="fa-solid fa-bag-shopping"></i>
-                <i class="fa-solid fa-user"></i>
+                <a href="cart.html" class="icon"><i class="fa-solid fa-bag-shopping"></i></a>
+                <a href="login.html" class="icon"><i class="fa-solid fa-user"></i></a>
               </li>
               
             </ul>
@@ -59,13 +59,13 @@
       </section>
 
       
-      <!--new-->
+      <!--new Arival-->
       <section id="new" class="w-100">
         <div class="container text-center mt-5 py-5">
           <h3>Our New Products</h3>
           <hr>
-          <p> Here are our new products</p>
-        <div class="row p-0 m-0">
+          <p> Here are our new ARRIVALS</p>
+        <div class="row mx-auto container-fluid">
           <div class="one col-lg-4 col-md-12 col-sm-12 p-0">
             <img class="img-fluid"  src="assets/images/new arrival/ac1.jpg" alt="">
             <div class="details">
@@ -95,40 +95,24 @@
 
   <!--popular-->
       <section id="popular" class="my-5 pb-5">
-        <div style="background-color: rgb(125, 118, 118);" class="container text-center mt-5 py-5">
+        <div class="container text-center mt-5 py-5">
           <h3>OUR Popular</h3>
           <hr>
           <p> Here are our popular products</p>
         </div>
 
         <div class="row mx-auto container-fluid">
+          <?php include('server/get_product.php')?>
+          <?php while($row = $product_result->fetch_assoc()){?>
+
           <div onclick="window.location.href='single_page.html'" class="product text-center col-lg-3 col-md-4 col-sm-12">
             <img class="img-fluid mb-3" src="assets/images/oven.jpg" alt="">
-            <h4 class="p-name">oven</h4>
-            <h4 class="p-price">Price: $500</h4>
+            <h4 class="p-name"><?php echo $row['product_name']?></h4>
+            <h4 class="p-price">Price: $ <?php echo $row['product_price'] ?> </h4>
             <button class="buy-btn">BUY NOW</button>
           </div>
 
-          <div onclick="window.location.href='single_page.html'" class="product text-center col-lg-3 col-md-4 col-sm-12">
-            <img class="img-fluid mb-3" src="assets/images/wash.jpg" alt="">
-            <h4 class="p-name">oven</h4>
-            <h4 class="p-price">Price: $500</h4>
-            <button class="buy-btn">BUY NOW</button>
-          </div>
-
-          <div onclick="window.location.href='single_page.html'" class="product text-center col-lg-3 col-md-4 col-sm-12">
-            <img class="img-fluid mb-3" src="assets/images/skytv.jpg" alt="">
-            <h4 class="p-name">oven</h4>
-            <h4 class="p-price">Price: $500</h4>
-            <button class="buy-btn">BUY NOW</button>
-          </div>
-
-          <div onclick="window.location.href='single_page.html'" class="product text-center col-lg-3 col-md-4 col-sm-12">
-            <img class="img-fluid mb-3" src="assets/images/geyser.jpg" alt="">
-            <h4 class="p-name">oven</h4>
-            <h4 class="p-price">Price: $500</h4>
-            <button class="buy-btn">BUY NOW</button>
-          </div>
+          <?php } ?>
         </div>
       </section>
 

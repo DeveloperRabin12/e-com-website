@@ -2,6 +2,11 @@
 
 .nav-buttons{
     margin-left: 63%;
+    
+}
+.nav-buttons a{
+    color: black;
+    
 }
    
 
@@ -14,6 +19,7 @@
 }
 
 body{
+    background-color: #cac3c3;
     font-family:'Poppins', sans-serif;
     padding-top: 100px;
 }
@@ -190,6 +196,8 @@ nav{
     width: 200px;
 }
 
+/* footer */
+
 footer{
     background-color: black;
 }
@@ -343,4 +351,20 @@ footer .copyright img{
     color: rgb(58, 60, 55);
     text-decoration:underline;
     font-weight: bold;
+}
+
+/* chekout */
+#checkout-form .checkout-small{
+    display:inline-block;
+    width: 40%;
+    margin: 5px auto;
+}
+
+#checkout-btn{
+    background-color:rgb(9, 9, 9);
+    color: aliceblue;
+}
+#checkout-btn:hover{
+    background-color:rgb(152, 147, 147);
+    color: black;
 }
