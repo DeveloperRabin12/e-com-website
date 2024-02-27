@@ -352,19 +352,3 @@ footer .copyright img{
     text-decoration:underline;
     font-weight: bold;
 }
-
-/* chekout */
-#checkout-form .checkout-small{
-    display:inline-block;
-    width: 40%;
-    margin: 5px auto;
-}
-
-#checkout-btn{
-    background-color:rgb(9, 9, 9);
-    color: aliceblue;
-}
-#checkout-btn:hover{
-    background-color:rgb(152, 147, 147);
-    color: black;
-}
