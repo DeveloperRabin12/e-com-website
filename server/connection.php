@@ -2,5 +2,5 @@
 $conn=mysqli_connect("localhost","root","","electronic");
 
 if(!$conn){
-    die("Connection failed: " . mysqli_connect_error());
+    die("problem in connecting server " . mysqli_connect_error());
 }

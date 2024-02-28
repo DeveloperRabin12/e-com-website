@@ -1,3 +1,22 @@
+<?php 
+
+include('server/connection.php');
+if(isset($_GET['product_id'])){
+ $product_id=$_GET['product_id'];
+ $stmt = $conn -> prepare("SELECT * from products Where product_id=?");
+ $stmt->bind_param("i",$product_id);
+  $stmt->execute();
+
+  $product = $stmt->get_result();
+}
+
+else{
+  header('losation:index.php');
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,41 +67,24 @@
       </div>
     </nav>
 
-      <!--cart section-->
-      <section class="cart container  my-2 py-1">
-        <div class="cart container my-5 py-5">
-          <h1><b>CART</b></h1>
-          <hr>
+
+      <section class="single my-5 pt-5">
+        <div class="row mt-5">
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <img class="img-fluid w-100 pb-2" src="assets/images/<?php echo $row['product_image'] ?>" alt="">
+            </div>
+                <?php while($row = $product->fetch_assoc()) {?>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <?php ?>
+                <h4><?php echo $row['product_name'] ?></h4>
+                <h3 class="py-3">Price Rs <?php echo $row['product_price'] ?></h3>
+                <input type="number" value="1">
+                <button class="buy-btn">Add to cart</button>
+                <h4 class="mt-3 mb-3">DETAILS</h4>
+                <span><?php echo $row['product_description'] ?></span>
+            </div>
+            <?php } ?>
         </div>
-
-        <table>
-          <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Total</th>
-          </tr>
-
-          <tr>
-            <td>
-              <div class="product-info">
-                <img src="assets/images/himstar43.jpg" alt="">
-                <div>
-                  <p>Himstar</p>
-                  <small>rs 1500</small>
-                  <br>
-                  <a class="remove-btn" href="">Remove</a>
-                </div>
-              </div>
-            </td>
-            <td>
-              <input type="number" value="1">
-              <a class="edit-btn" href="">Edit</a>
-            </td>
-
-            <td><p>rs 1500 </p></td>
-            
-          </tr>
-        </table>
       </section>
 
 
@@ -90,7 +92,12 @@
 
 
 
-      <footer class="mt-5 py-5">
+
+
+
+
+         <!--footer-->
+    <footer class="mt-5 py-5">
         <div class="row">
                     <div class="footer-one col-lg-4 col-md-6 col-sm-12 px-5">
                     <img class="logo" src="assets/images/mainlogo.png"/>
@@ -151,4 +158,4 @@
      
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
-  </html>      
+  </html>

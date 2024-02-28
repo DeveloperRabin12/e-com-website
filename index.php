@@ -102,17 +102,18 @@
         </div>
 
         <div class="row mx-auto container-fluid">
-          <?php include('server/get_product.php')?>
-          <?php while($row = $product_result->fetch_assoc()){?>
+        
+<?php include('server/get_product.php') ?>
 
+<?php while($row= $product_result->fetch_assoc()) {?>
           <div onclick="window.location.href='single_page.html'" class="product text-center col-lg-3 col-md-4 col-sm-12">
-            <img class="img-fluid mb-3" src="assets/images/oven.jpg" alt="">
-            <h4 class="p-name"><?php echo $row['product_name']?></h4>
-            <h4 class="p-price">Price: $ <?php echo $row['product_price'] ?> </h4>
+            <img class="img-fluid mb-3" src="assets/images/refri/<?php echo $row['product_image'] ?>" alt="">
+            <h4 class="p-name"><?php echo $row['product_name'] ?></h4>
+            <h4 class="p-price">Price: rs <?php echo $row['product_price'] ?></h4>
             <button class="buy-btn">BUY NOW</button>
           </div>
 
-          <?php } ?>
+                    <?php } ?>
         </div>
       </section>
 
@@ -125,33 +126,19 @@
       </div>
 
       <div class="row mx-auto container-fluid">
+
+      <?php include('server/get_washing.php') ?>
+
+      <?php while($row = $washing_result->fetch_assoc()) {?>
         <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-          <img class="img-fluid mb-3" src="assets/images/washing/wash1.jpg" alt="">
-          <h4 class="p-name">Washing Machine</h4>
-          <h4 class="p-price">Price: $500</h4>
-          <button class="buy-btn">BUY NOW</button>
+          <img class="img-fluid mb-3" src="assets/images/washing/<?php echo $row['product_image'] ?>" alt="">
+          <h4 class="p-name"><?php echo $row['product_name'] ?></h4>
+          <h4 class="p-price">Price: Rs <?php echo $row['product_price'] ?></h4>
+          <a href="single_page.php?product_id=<?php echo $row['product_id'];?>"><button class="buy-btn">BUY NOW</button></a>
         </div>
 
-        <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-          <img class="img-fluid mb-3" src="assets/images/washing/wwash4.jpg" alt="">
-          <h4 class="p-name">Washing Machine</h4>
-          <h4 class="p-price">Price: $500</h4>
-          <button class="buy-btn">BUY NOW</button>
-        </div>
-
-        <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-          <img class="img-fluid mb-3" src="assets/images/washing/swash3.jpg" alt="">
-          <h4 class="p-name">Washing Machine</h4>
-          <h4 class="p-price">Price: $500</h4>
-          <button class="buy-btn">BUY NOW</button>
-        </div>
-
-        <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-          <img class="img-fluid mb-3" src="assets/images/washing/hwash7.jpg" alt="">
-          <h4 class="p-name">Washing Machine</h4>
-          <h4 class="p-price">Price: $500</h4>
-          <button class="buy-btn">BUY NOW</button>
-        </div>
+        
+      <?php } ?>
       </div>
     </section>
 
@@ -164,33 +151,18 @@
       </div>
 
       <div class="row mx-auto container-fluid">
+
+      <?php include('server/get_fridge.php')  ?>
+
+    <?php while ($row=$fridge_result->fetch_assoc()) { ?>
         <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-          <img class="img-fluid mb-3" src="assets/images/refri/fridge1.jpg" alt="">
-          <h4 class="p-name">Refrigerator</h4>
-          <h4 class="p-price">Price: $500</h4>
+          <img class="img-fluid mb-3" src="assets/images/refri/<?php echo $row['product_image'] ?>" alt="">
+          <h4 class="p-name"><?php echo $row['product_name'] ?></h4>
+          <h4 class="p-price">Price: RS <?php echo $row['product_pricce'] ?></h4>
           <button class="buy-btn">BUY NOW</button>
         </div>
 
-        <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-          <img class="img-fluid mb-3" src="assets/images/refri/fridge2.jpg" alt="">
-          <h4 class="p-name">Refrigerator</h4>
-          <h4 class="p-price">Price: $500</h4>
-          <button class="buy-btn">BUY NOW</button>
-        </div>
-
-        <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-          <img class="img-fluid mb-3" src="assets/images/refri/fridge3.jpg" alt="">
-          <h4 class="p-name">Refrigerator</h4>
-          <h4 class="p-price">Price: $500</h4>
-          <button class="buy-btn">BUY NOW</button>
-        </div>
-
-        <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-          <img class="img-fluid mb-3" src="assets/images/refri/fridge4.jpg" alt="">
-          <h4 class="p-name">Refrigerator</h4>
-          <h4 class="p-price">Price: $500</h4>
-          <button class="buy-btn">BUY NOW</button>
-        </div>
+         <?php } ?>
       </div>
     </section>
 
@@ -203,33 +175,17 @@
       </div>
 
       <div class="row mx-auto container-fluid">
+
+      <?php include('server/get_house_items.php') ?>
+      <?php while($row=$houseitem_result->fetch_assoc()) {?>
         <div class="product text-center col-lg-3 col-md-4 col-sm-12 ">
-          <img class="img-fluid mb-3" src="assets/images/tv.png" alt="">
-          <h4 class="p-name">oven</h4>
-          <h4 class="p-price">Price: $500</h4>
+          <img class="img-fluid mb-3" src="assets/images/<?php echo $row['producct_image'] ?>" alt="">
+          <h4 class="p-name"><?php echo $row['product_name'] ?></h4>
+          <h4 class="p-price">Price: Rs <?php echo $row ['product_price']?></h4>
           <button class="buy-btn">BUY NOW</button>
         </div>
+        <?php } ?>
 
-        <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-          <img class="img-fluid mb-3" src="assets/images/other house/kett1.jpg" alt="">
-          <h4 class="p-name">oven</h4>
-          <h4 class="p-price">Price: $500</h4>
-          <button class="buy-btn">BUY NOW</button>
-        </div>
-
-        <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-          <img class="img-fluid mb-3" src="assets/images/other house/vacc2.jpg" alt="">
-          <h4 class="p-name">oven</h4>
-          <h4 class="p-price">Price: $500</h4>
-          <button class="buy-btn">BUY NOW</button>
-        </div>
-
-        <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-          <img class="img-fluid mb-3" src="assets/images/other house/ind2.jpg" alt="">
-          <h4 class="p-name">oven</h4>
-          <h4 class="p-price">Price: $500</h4>
-          <button class="buy-btn">BUY NOW</button>
-        </div>
       </div>
     </section>
 

@@ -269,14 +269,14 @@ footer .copyright img{
 }
 
 .cart th{
-    text-align: left;
+    text-align: center;
     padding: 5px 10px;
     color:#fff;
     background-color: black;
 }
 
 .cart td{
-    padding: 10px 20px;
+    padding: 10px 30px;
     text-align: center;
 }
 
@@ -289,7 +289,8 @@ footer .copyright img{
 .cart td input{
     width: 40px;
     height: 30px;
-    padding-right: 10px;
+    padding-left: 50px;
+    text-align: center;
 }
 
 .cart td a{
@@ -299,6 +300,10 @@ footer .copyright img{
     border-radius: 5px;
     text-decoration: none;
     transition: 0.4s ease;
+}
+
+.cart table tr td {
+    text-align: center;
 }
 
 /* login */
