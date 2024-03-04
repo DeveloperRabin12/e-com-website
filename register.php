@@ -1,3 +1,72 @@
+<?php 
+
+session_start();
+include 'server/connection.php';
+
+
+//if user is already logged in
+
+if(isset($_SESSION['logged_in'])){
+  header('location:account.php');
+  exit;
+}
+
+if(isset($_POST['register'])){
+    
+              $name = $_POST['name'];
+              $email = $_POST['email'];
+              $password = $_POST['password'];
+              $password_con = $_POST['password-con'];
+
+              //check if password matches
+              if($password !== $password_con){
+                  header('location:register.php?password does not match');
+              }
+
+              //check if password is 8 characters long
+              else if(strlen($password)<8){
+                  header('location:register.php?password must be 8 characters long');
+              }
+              
+
+              else{
+              //check if user already exists
+              $stmt1=$conn->prepare("SELECT count(*) FROM users WHERE user_email=?");
+              $stmt1->bind_param('s', $email);
+              $stmt1->execute();
+              $stmt1->bind_result($num_rows);
+              $stmt1->store_result();
+              $stmt1->fetch();
+
+              //if user already exists of same email
+              if($num_rows>0){
+                  header('location:register.php?user already exists');
+              }
+
+              //if no user of given email exist
+              else{
+            //inser data of user in databse
+              $stmt=$conn->prepare("INSERT INTO users (user_name, user_email, user_password) VALUES (?,?,?)");
+              $stmt->bind_param('sss', $name, $email, md5($password));
+              
+              if($stmt->execute()){
+                $_SESSION['user_email']=$email;
+                $_SESSION['user_name']=$name;
+                $_SESSION['logged_in']=true; 
+                header('location:account.php?register=registered successfully');
+              }
+              else{
+                  header('location:register.php?error=error occured');
+                  
+              }
+            }
+          }
+}
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +83,7 @@
    <!-- Navbar -->
    <nav class="navbar navbar-expand-lg navbar-light py-3 fixed-top">
     <div class="container">
-     <img class="logo" src="assets/images/mainlogo.png"/>
+     <img onclick="window.location.href='index.php'" class="logo" src="assets/images/samaan-logo.png"/>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -22,24 +91,20 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
          
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="index.php">Home</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="shop.html">Shop</a>
-          </li>
-
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#">Blog</a>
-          </li> -->
+            <a class="nav-link" href="shop.php">Shop</a>
+          </li> 
 
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link" href="contact.php">Contact</a>
           </li>
 
           <li class="nav-item">
-            <a href="cart.html" class="icon"><i class="fa-solid fa-bag-shopping"></i></a>
-            <a href="login.html" class="icon"><i class="fa-solid fa-user"></i></a>
+            <a href="cart.php" class="icon"><i class="fa-solid fa-bag-shopping"></i></a>
+            <a href="login.php" class="icon"><i class="fa-solid fa-user"></i></a>
           </li>
           
         </ul>
@@ -50,28 +115,38 @@
    
 
 
-    <!-- Login Form -->
+    <!-- register Form -->
     <section class="my-3 py-3">
         <div class="container text-center mt-2 pt-3 ">
-            <h1 style="color: antiquewhite; background-color: black;" class="form-weight-bold">Login</h1>
+            <h1 style="color: antiquewhite; background-color: black;" class="form-weight-bold">Register</h1>
             <hr>
         </div>
         <div class="mx-auto container">
-            <form id="login-form">
+            <form id="register-form" method="post" action="register.php">
+           <p> <?php if(isset($_GET['error'])) {echo $_GET['error'];} ?></p>    
+            <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="name" class="form-control" id="register-name" name="name" placeholder="John Stones" required>
+                </div>
+
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="login-email" name="email" placeholder="example@gmail.com" required>
+                    <input type="email" class="form-control" id="register-email" name="email" placeholder="example@gmail.com" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="login-password" name="password" placeholder="password" required>
+                    <input type="password" class="form-control" id="register-password" name="password" placeholder="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Confirm Password</label>
+                    <input type="password" class="form-control" id="register-password-con" name="password-con" placeholder="retype password" required>
                 </div>
                 <div class="form-group">
                     
-                    <input type="submit" class="btn" id="login-btn" value="Login">
+                    <input type="submit" class="btn" id="register-btn" name="register" value="Register">
                 </div>
                 <div class="form-group">
-                    <p>Don't have account?<a id="register-link" class="btn"> Register now</a></p>
+                    <p>Already have account?<a id="login-link" href="login.php" class="btn"> Log in</a></p>
                  </div>                
 
             </form>
@@ -84,7 +159,7 @@
       <footer class="mt-5 py-5">
         <div class="row">
                     <div class="footer-one col-lg-4 col-md-6 col-sm-12 px-5">
-                    <img class="logo" src="assets/images/mainlogo.png"/>
+                    <img class="logo" src="assets/images/samaan-logo.png"/>
                     <p class= "pt-3">Lorem ipsum dolor sit amet.</p>
                     </div>
         <div class="footer-one col-lg-4 col-md-6 col-sm-12">

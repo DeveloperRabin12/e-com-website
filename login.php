@@ -1,3 +1,50 @@
+<?php 
+ session_start();
+include('server/connection.php');
+
+
+if(isset($_SESSION['logged_in'])){
+  header('location:account.php');
+  exit;
+}
+
+if(isset($_POST['login'])){
+  $email = $_POST['email'];
+  $password = md5($_POST['password']);
+
+  $stmt=$conn->prepare("SELECT user_id, user_name, user_email, user_password FROM users WHERE user_email=? AND user_password=? LIMIT 1");
+  $stmt->bind_param('ss', $email, md5($password));
+  $stmt->execute();
+ if($stmt->execute()){
+  $stmt->bind_result($user_id, $user_name, $user_email,$user_password);
+  $stmt->store_result();
+
+  if($stmt->num_rows()==1){
+    $stmt->fetch();
+
+    $_SESSION['user_id']=$user_id;
+    $_SESSION['user_name']=$user_name;
+    $_SESSION['user_email']=$user_email;
+    $_SESSION['logged_in']=true;
+
+    header('location:account.php?login=successfully logged in');
+  }
+  else{
+    header('location:login.php?error=login error');
+  
+  }
+
+ }
+ //if error occur
+ else{
+    header('location:login.php?error=login error');
+ }
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +61,7 @@
    <!-- Navbar -->
    <nav class="navbar navbar-expand-lg navbar-light py-3 fixed-top">
     <div class="container">
-     <img class="logo" src="assets/images/mainlogo.png"/>
+     <img onclick="window.location.href='index.php'" class="logo" src="assets/images/samaan-logo.png"/>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -22,24 +69,20 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
          
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="index.php">Home</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="shop.html">Shop</a>
-          </li>
-
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#">Blog</a>
-          </li> -->
-
-          <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link" href="shop.php">Shop</a>
           </li>
 
           <li class="nav-item">
-            <a href="cart.html" class="icon"><i class="fa-solid fa-bag-shopping"></i></a>
-            <a href="login.html" class="icon"><i class="fa-solid fa-user"></i></a>
+            <a class="nav-link" href="contact.php">Contact</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="cart.php" class="icon"><i class="fa-solid fa-bag-shopping"></i></a>
+            <a href="login.php" class="icon"><i class="fa-solid fa-user"></i></a>
           </li>
           
         </ul>
@@ -50,33 +93,29 @@
    
 
 
-    <!-- register Form -->
+    <!-- Login Form -->
     <section class="my-3 py-3">
         <div class="container text-center mt-2 pt-3 ">
-            <h1 style="color: antiquewhite; background-color: black;" class="form-weight-bold">Register</h1>
+            <h1 style="color: antiquewhite; background-color: black;" class="form-weight-bold">Login</h1>
             <hr>
         </div>
         <div class="mx-auto container">
-            <form id="register-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="name" class="form-control" id="register-name" name="name" placeholder="John Stones" required>
-                </div>
-
+            <form id="login-form" action="login.php" method="post">
+              <h5><?php if(isset($_GET['error'])) {echo $_GET['error'];}?></h5>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="register-email" name="email" placeholder="example@gmail.com" required>
+                    <input type="email" class="form-control" id="login-email" name="email" placeholder="example@gmail.com" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="register-password" name="password" placeholder="password" required>
+                    <input type="password" class="form-control" id="login-password" name="password" placeholder="password" required>
                 </div>
                 <div class="form-group">
                     
-                    <input type="submit" class="btn" id="register-btn" value="Register">
+                    <input type="submit" name="login" class="btn" id="login-btn" value="Login">
                 </div>
                 <div class="form-group">
-                    <p>Already have account?<a id="login-link" class="btn"> Log in</a></p>
+                    <p>Don't have account?<a href="register.php" id="register-link" class="btn"> Register now</a></p>
                  </div>                
 
             </form>
@@ -89,7 +128,7 @@
       <footer class="mt-5 py-5">
         <div class="row">
                     <div class="footer-one col-lg-4 col-md-6 col-sm-12 px-5">
-                    <img class="logo" src="assets/images/mainlogo.png"/>
+                    <img class="logo" src="assets/images/samaan-logo.png"/>
                     <p class= "pt-3">Lorem ipsum dolor sit amet.</p>
                     </div>
         <div class="footer-one col-lg-4 col-md-6 col-sm-12">

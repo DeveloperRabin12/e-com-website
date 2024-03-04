@@ -1,3 +1,39 @@
+
+<?php 
+
+session_start();
+
+
+
+if(!isset($_SESSION['logged_in'])){
+  header('location:login.php');
+  exit;
+}
+
+
+if(isset($_GET['logout'])){
+
+   if(isset($_SESSION['logged_in'])){
+    session_destroy();
+    unset($_SESSION['logged_in']);
+    unset($_SESSION['user_email']);
+    unset($_SESSION['user_name']);
+    header('location:login.php');
+    exit;
+   }
+
+
+}
+
+
+?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +50,7 @@
    <!-- Navbar -->
    <nav class="navbar navbar-expand-lg navbar-light py-3 fixed-top">
     <div class="container">
-     <img class="logo" src="assets/images/mainlogo.png"/>
+     <img onclick="window.location.href='index.php'" class="logo" src="assets/images/samaan-logo.png"/>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -22,11 +58,11 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
          
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="index.php">Home</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="shop.html">Shop</a>
+            <a class="nav-link" href="shop.php">Shop</a>
           </li>
 
           <!-- <li class="nav-item">
@@ -34,12 +70,12 @@
           </li> -->
 
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link" href="contact.php">Contact</a>
           </li>
 
           <li class="nav-item">
-            <a href="cart.html" class="icon"><i class="fa-solid fa-bag-shopping"></i></a>
-            <a href="login.html" class="icon"><i class="fa-solid fa-user"></i></a>
+            <a href="cart.php" class="icon"><i class="fa-solid fa-bag-shopping"></i></a>
+            <a href="login.php" class="icon"><i class="fa-solid fa-user"></i></a>
           </li>
           
         </ul>
@@ -53,19 +89,19 @@
     <!-- Account -->
     <section class="my-3 py-3">
         <div class="row container mx-auto ">
-           <div class="text-center mt-3 pt-3 col-lg-6 col-md-12 col-sm-12">
-                <h1>Account Information</h1>
+           <div class="text-center mt-1 pt-1 col-lg-6 col-md-12 col-sm-12">
+                <h2>Account Information</h2>
                 <hr>
                 <div class="account-info">
-                    <p>Name john</p>
-                    <p>email john@gmail.com</p>
-                    <p><a href="" id="order-btn">your orders</a></p>
-                    <p><a href="" id="logout-btn">logout</a></p>
+                    <p>Welcome <?php echo $_SESSION['user_name'] ?></p>
+                    <p><?php echo $_SESSION['user_email'] ?></p>
+                    <!-- <p><a href="" id="order-btn">your orders</a></p> -->
+                    <p><a href="account.php?logout=1" id="logout-btn">logout</a></p>
                 </div>
            </div>
-           <!-- <div class="col-lg-6 col-md-12 col-sm-12">
+           <div class=" text-center mt-1 pt-1 col-lg-6 col-md-12 col-sm-12">
               <form id="account-form" action="">
-                <h3>Change Password</h3>
+                <h2>Change Password</h2>
                 <hr>
                 <div>
                   <label for="">Password</label>
@@ -80,20 +116,20 @@
                   <button type="submit" class="btn-account">Change Password</button>
                 </div>
               </form>
-           </div> -->
+           </div>
         </div>
         
             
     </section>
 
     <section class="cart container  my-2 py-1">
-      <div class="cart container my-5 py-5">
+      <div class="text-center cart container my-5 py-5">
         <h1><b>Your Orders</b></h1>
         <hr>
       </div>
 
       <table>
-        <tr>
+        <tr style="text-align: center;">
           <th>Product</th>
           <th>Quantity</th>
         </tr>
@@ -118,7 +154,7 @@
       <footer class="mt-5 py-5">
         <div class="row">
                     <div class="footer-one col-lg-4 col-md-6 col-sm-12 px-5">
-                    <img class="logo" src="assets/images/mainlogo.png"/>
+                    <img class="logo" src="assets/images/samaan-logo.png"/>
                     <p class= "pt-3">Lorem ipsum dolor sit amet.</p>
                     </div>
         <div class="footer-one col-lg-4 col-md-6 col-sm-12">

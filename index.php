@@ -8,38 +8,41 @@
 
     <script src="https://kit.fontawesome.com/7db0450798.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/style.css"/>
+    
+      <style>
+        #popular img,#w-machine img,#fridge img,#h-items img{
+          border:2px solid black;
+        }
+      </style>
+
 </head>
 <body>
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light py-3 fixed-top">
         <div class="container">
-         <img class="logo" src="assets/images/mainlogo.png"/>
+         <img onclick="window.location.href='index.php'" class="logo" src="assets/images/samaan-logo.png"/>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse nav-buttons" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mx-auto  mb-lg-0">
              
               <li class="nav-item">
-                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link active" href="index.php">Home</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="shop.html">Shop</a>
-              </li>
-
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="#">Blog</a>
-              </li> -->
+                <a class="nav-link" href="shop.php">Shop</a>
+      </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
+                <a class="nav-link" href="contact.php">Contact</a>
               </li>
 
               <li class="nav-item">
-                <a href="cart.html" class="icon"><i class="fa-solid fa-bag-shopping"></i></a>
-                <a href="login.html" class="icon"><i class="fa-solid fa-user"></i></a>
+                <a href="cart.php" class="icon"><i class="fa-solid fa-bag-shopping"></i></a>
+                <a href="login.php" class="icon"><i class="fa-solid fa-user"></i></a>
               </li>
               
             </ul>
@@ -54,63 +57,66 @@
           <h5>NEW ARRIVALS</h5>
           <h1><span>Best Prices</span> Offerings</h1>
           <p>Our store offer good things at best Prices</p>
-          <button>shop now</button>
+          <button onclick="window.location.href='shop.php'">shop now</button>
         </div>
       </section>
 
       
       <!--new Arival-->
       <section id="new" class="w-100">
-        <div class="container text-center mt-5 py-5">
+        <div class="container text-center mt-3 py-3">
           <h3>Our New Products</h3>
           <hr>
           <p> Here are our new ARRIVALS</p>
-        <div class="row mx-auto container-fluid">
-          <div class="one col-lg-4 col-md-12 col-sm-12 p-0">
-            <img class="img-fluid"  src="assets/images/new arrival/ac1.jpg" alt="">
-            <div class="details">
-              <h2>Air Conditioner</h2>
-              <button class="text-uppercase">BUY NOW</button>
-            </div>
-          </div>
+        
+        <div class=" container row mx-auto ">
+    
+                <div onclick="wiindow.location.href='single_page.php'" class="one col-lg-4 col-md-12 col-sm-12 p-0">
+                  <img class="img-fluid"  src="assets/images/ac1.jpg" alt="">
+                  <div class="details">
+                    <h2>Air Conditioner</h2>
+                    <button class="text-uppercase">BUY NOW</button>
+                  </div>
+                </div>
 
-          <div class="one col-lg-4 col-md-12 col-sm-12 p-0">
-            <img class="img-fluid"  src="assets/images/new arrival/vacc1.jpg" alt="">
-            <div class="details">
-              <h2>Vaccum Cleaner</h2>
-              <button class="text-uppercase">BUY NOW</button>
-            </div>
-          </div>
+              <div class="one col-lg-4 col-md-12 col-sm-12 p-0">
+                <img class="img-fluid"  src="assets/images/vacc1.jpg" alt="">
+                <div class="details">
+                  <h2>Vaccum Cleaner</h2>
+                  <button class="text-uppercase">BUY NOW</button>
+                </div>
+              </div>
 
-          <div class="one col-lg-4 col-md-12 col-sm-12 p-0">
-            <img class="img-fluid"  src="assets/images/oven.jpg" alt="">
-            <div class="details">
-              <h2>Microwave oven</h2>
-              <button class="text-uppercase">BUY NOW</button>
-            </div>
-          </div>
+                <div class="one col-lg-4 col-md-12 col-sm-12 p-0">
+                <img class="img-fluid"  src="assets/images/oven.jpg" alt="">
+                <div class="details">
+                  <h2>Microwave oven</h2>
+                  <button class="text-uppercase">BUY NOW</button>
+                </div>
+               </div>
         </div>
+      </div>
 
       </section>
 
   <!--popular-->
-      <section id="popular" class="my-5 pb-5">
+      <section id="popular" class="my-2 pb-2">
         <div class="container text-center mt-5 py-5">
           <h3>OUR Popular</h3>
           <hr>
           <p> Here are our popular products</p>
         </div>
 
-        <div class="row mx-auto container-fluid">
+        <div class="row mx-auto container">
         
 <?php include('server/get_product.php') ?>
 
 <?php while($row= $product_result->fetch_assoc()) {?>
-          <div onclick="window.location.href='single_page.html'" class="product text-center col-lg-3 col-md-4 col-sm-12">
-            <img class="img-fluid mb-3" src="assets/images/refri/<?php echo $row['product_image'] ?>" alt="">
+          <div class="product text-center col-lg-3 col-md-4 col-sm-12">
+            <img class="img-fluid mb-3" src="assets/images/popular/<?php echo $row['product_image'] ?>" alt="">
             <h4 class="p-name"><?php echo $row['product_name'] ?></h4>
             <h4 class="p-price">Price: rs <?php echo $row['product_price'] ?></h4>
-            <button class="buy-btn">BUY NOW</button>
+            <a href="single_page.php?product_id=<?php echo $row['product_id'] ?>"><button class="buy-btn">BUY NOW</button></a>
           </div>
 
                     <?php } ?>
@@ -119,19 +125,19 @@
 
     <!--washing machines-->
     <section id="w-machine" class="my-5">
-      <div class="container text-center mt-5 py-5">
+      <div class="container text-center mt-3 py-3">
         <h3>Washing Machines</h3>
         <hr>
-        <p> Here are our feature products</p>
+        <p> Here are our Washing Machines</p>
       </div>
 
-      <div class="row mx-auto container-fluid">
+      <div class="row mx-auto container">
 
       <?php include('server/get_washing.php') ?>
 
       <?php while($row = $washing_result->fetch_assoc()) {?>
         <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-          <img class="img-fluid mb-3" src="assets/images/washing/<?php echo $row['product_image'] ?>" alt="">
+          <img class="img-fluid mb-3" src="assets/images/<?php echo $row['product_image'] ?>" alt="">
           <h4 class="p-name"><?php echo $row['product_name'] ?></h4>
           <h4 class="p-price">Price: Rs <?php echo $row['product_price'] ?></h4>
           <a href="single_page.php?product_id=<?php echo $row['product_id'];?>"><button class="buy-btn">BUY NOW</button></a>
@@ -143,23 +149,23 @@
     </section>
 
     <!--refrigerator-->
-    <section id="fridge" class="my-5">
+    <section id="fridge" class="my-3">
       <div class="container text-center mt-5 py-5">
-        <h3>Washing Machines</h3>
+        <h3>Refrigerator</h3>
         <hr>
-        <p> Here are our feature products</p>
+        <p> Here are our Refrigerator</p>
       </div>
 
-      <div class="row mx-auto container-fluid">
+      <div class="row mx-auto container">
 
-      <?php include('server/get_fridge.php')  ?>
+      <?php include('server/get_fridge.php') ?>
 
-    <?php while ($row=$fridge_result->fetch_assoc()) { ?>
+      <?php while($row = $f_result->fetch_assoc()) {?>
         <div class="product text-center col-lg-3 col-md-4 col-sm-12">
           <img class="img-fluid mb-3" src="assets/images/refri/<?php echo $row['product_image'] ?>" alt="">
           <h4 class="p-name"><?php echo $row['product_name'] ?></h4>
-          <h4 class="p-price">Price: RS <?php echo $row['product_pricce'] ?></h4>
-          <button class="buy-btn">BUY NOW</button>
+          <h4 class="p-price">Price: RS <?php echo $row['product_price'] ?></h4>
+          <a href="single_page.php?product_id=<?php echo $row['product_id'] ?>"><button class="buy-btn">BUY NOW</button></a>
         </div>
 
          <?php } ?>
@@ -171,18 +177,19 @@
       <div class="container text-center mt-5 py-5">
         <h3>Other House Items</h3>
         <hr>
-        <p> Here are our feature products</p>
+        <p> Here are our other house items</p>
       </div>
 
-      <div class="row mx-auto container-fluid">
+      <div class="row mx-auto container">
 
-      <?php include('server/get_house_items.php') ?>
-      <?php while($row=$houseitem_result->fetch_assoc()) {?>
+    <?php include('server/get_house_items.php') ?>
+     <?php while($row = $houseitem_result->fetch_assoc()) {?>
+
         <div class="product text-center col-lg-3 col-md-4 col-sm-12 ">
-          <img class="img-fluid mb-3" src="assets/images/<?php echo $row['producct_image'] ?>" alt="">
+          <img class="img-fluid mb-3" src="assets/images/otherhouse/<?php echo $row['product_image'] ?>" alt="">
           <h4 class="p-name"><?php echo $row['product_name'] ?></h4>
           <h4 class="p-price">Price: Rs <?php echo $row ['product_price']?></h4>
-          <button class="buy-btn">BUY NOW</button>
+          <a href="single_page.php?product_id=<?php echo $row['product_id'] ?>"><button class="buy-btn">BUY NOW</button></a>
         </div>
         <?php } ?>
 
@@ -207,7 +214,7 @@
     <footer class="mt-5 py-5">
       <div class="row">
                   <div class="footer-one col-lg-4 col-md-6 col-sm-12 px-5">
-                  <img class="logo" src="assets/images/mainlogo.png"/>
+                  <img class="logo" src="assets/images/samaan-logo.png"/>
                   <p class= "pt-3">Lorem ipsum dolor sit amet.</p>
                   </div>
       <div class="footer-one col-lg-4 col-md-6 col-sm-12">

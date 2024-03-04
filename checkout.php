@@ -1,4 +1,19 @@
-<!DOCTYPE html>
+<<?php
+
+session_start();
+
+if(!empty($_SESSION['cart']) && isset($_POST['checkout-btn'])){
+
+}
+
+else{
+    header('Location: index.php');
+}
+
+
+?>
+
+!<DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,7 +29,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light py-3 fixed-top">
         <div class="container">
-         <img class="logo" src="assets/images/mainlogo.png"/>
+         <img onclick="window.location.href='index.php'" class="logo" src="assets/images/samaan-logo.png"/>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -22,24 +37,20 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
              
               <li class="nav-item">
-                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.php">Home</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="shop.html">Shop</a>
-              </li>
-
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="#">Blog</a>
-              </li> -->
-
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
+                <a class="nav-link" href="shop.php">Shop</a>
               </li>
 
               <li class="nav-item">
-                <a href="cart.html" class="icon"><i class="fa-solid fa-bag-shopping"></i></a>
-                <a href="login.html" class="icon"><i class="fa-solid fa-user"></i></a>
+                <a class="nav-link" href="contact.php">Contact</a>
+              </li>
+
+              <li class="nav-item">
+                <a href="cart.php" class="icon"><i class="fa-solid fa-bag-shopping"></i></a>
+                <a href="login.php" class="icon"><i class="fa-solid fa-user"></i></a>
               </li>
               
             </ul>
@@ -53,8 +64,8 @@
             <h1 style="color: antiquewhite; background-color: black;" class="form-weight-bold">Checkout</h1>
             <hr>
         </div>
-        <div class="mx-auto container">
-            <form id="checkout-form">
+        <div class=" mx-auto container">
+            <form id="checkout-form" action="server/place_order.php" method="post">
                 <div class="form-group checkout-small">
                     <label for="name">Name</label>
                     <input type="name" class="form-control" id="checkout-name" name="name" placeholder="name" required>
@@ -73,8 +84,8 @@
                     <input type="text" class="form-control" id="checkout-address" name="address" placeholder="bhaktapur" required>
                 </div>
                 <div class="form-group ">
-                    
-                    <input type="submit" class="btn" id="checkout-btn" value="Place order">
+                    <p>total amount : Rs <?php echo $_SESSION['total-prc'] ?></p>
+                    <input type="submit" name="place-order" class="btn" id="checkout-btn" value="Place order">
                 </div>
                 
 
@@ -94,7 +105,7 @@
         <footer class="mt-5 py-5">
             <div class="row">
                         <div class="footer-one col-lg-4 col-md-6 col-sm-12 px-5">
-                        <img class="logo" src="assets/images/mainlogo.png"/>
+                        <img class="logo" src="assets/images/samaan-logo.png"/>
                         <p class= "pt-3">Lorem ipsum dolor sit amet.</p>
                         </div>
             <div class="footer-one col-lg-4 col-md-6 col-sm-12">

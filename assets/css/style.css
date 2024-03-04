@@ -18,6 +18,8 @@
 
 }
 
+
+
 body{
     background-color: #cac3c3;
     font-family:'Poppins', sans-serif;
@@ -108,7 +110,7 @@ nav{
 }
 
 .logo{
-    height: 40px;
+    height: 50px;
     width: 90px;
 }
 #home{
@@ -255,57 +257,23 @@ footer .copyright img{
     padding-right: 10px;
 }
 
+.single .page img{
+    width: 200%;
+    height: 30000%;
+    /* background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat; */
+}
 
 /* for cart */
-.cart table{
+.cart1 table{
     width: 100%;
     border-collapse: collapse;
 }
-
-.cart .product-info{
+.cart1 .product-info{
     display: flex;
     flex-wrap: wrap;
-
 }
-
-.cart th{
-    text-align: center;
-    padding: 5px 10px;
-    color:#fff;
-    background-color: black;
-}
-
-.cart td{
-    padding: 10px 30px;
-    text-align: center;
-}
-
-.cart td img{
-    width: 80px;
-    height: 80px;
-    margin-right: 10px;
-}
-
-.cart td input{
-    width: 40px;
-    height: 30px;
-    padding-left: 50px;
-    text-align: center;
-}
-
-.cart td a{
-    color: rgb(246, 240, 240);
-    padding: 5px 10px;
-    background-color: #000000;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: 0.4s ease;
-}
-
-.cart table tr td {
-    text-align: center;
-}
-
 /* login */
 #login-form{
     width: 50%;
@@ -356,4 +324,19 @@ footer .copyright img{
     color: rgb(58, 60, 55);
     text-decoration:underline;
     font-weight: bold;
+}
+
+/* checkout */
+#chechout-form .btn{
+    font-size: 0.8rem;
+    font-weight: 700;
+    outline: none;
+    border: none;
+    background-color:rgb(9, 9, 9);
+    color: aliceblue;
+    padding: 13px 30px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.4s ease;
+
 }

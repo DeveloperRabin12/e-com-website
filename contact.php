@@ -14,7 +14,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light py-3 fixed-top">
         <div class="container">
-         <img class="logo" src="assets/images/mainlogo.png"/>
+         <img onclick="window.location.href='index.php'"  class="logo" src="assets/images/samaan-logo.png"/>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -22,24 +22,20 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
              
               <li class="nav-item">
-                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.php">Home</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="shop.html">Shop</a>
-              </li>
-
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="#">Blog</a>
-              </li> -->
-
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
+                <a class="nav-link" href="shop.php">Shop</a>
               </li>
 
               <li class="nav-item">
-                <a href="cart.html" class="icon"><i class="fa-solid fa-bag-shopping"></i></a>
-                <a href="login.html" class="icon"><i class="fa-solid fa-user"></i></a>
+                <a class="nav-link" href="contact.php">Contact</a>
+              </li>
+
+              <li class="nav-item">
+                <a href="cart.php" class="icon"><i class="fa-solid fa-bag-shopping"></i></a>
+                <a href="login.php" class="icon"><i class="fa-solid fa-user"></i></a>
               </li>
               
             </ul>
@@ -52,7 +48,7 @@
 
    
 
-    <!--contact form-->
+    <!--contact-->
     <section id="contact" class="container my-1 py-2">
         <div class="container text-center mt-2">
             <h2>Contact Us</h2>
@@ -72,7 +68,7 @@
     <footer class="mt-5 py-5">
       <div class="row">
                   <div class="footer-one col-lg-4 col-md-6 col-sm-12 px-5">
-                  <img class="logo" src="assets/images/mainlogo.png"/>
+                  <img class="logo" src="assets/images/samaan-logo.png"/>
                   <p class= "pt-3">Lorem ipsum dolor sit amet.</p>
                   </div>
       <div class="footer-one col-lg-4 col-md-6 col-sm-12">

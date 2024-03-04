@@ -2,16 +2,19 @@
 
 include('server/connection.php');
 if(isset($_GET['product_id'])){
+  //retrive data from url
  $product_id=$_GET['product_id'];
  $stmt = $conn -> prepare("SELECT * from products Where product_id=?");
  $stmt->bind_param("i",$product_id);
   $stmt->execute();
 
-  $product = $stmt->get_result();
+  $product_re = $stmt->get_result();
+
 }
 
+
 else{
-  header('losation:index.php');
+  header('location:index.php');
 }
 ?>
 
@@ -33,7 +36,7 @@ else{
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light py-3 fixed-top">
       <div class="container">
-       <img class="logo" src="assets/images/mainlogo.png"/>
+       <img onclick="window.location.href='index.php'" class="logo" src="assets/images/samaan-logo.png"/>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -41,24 +44,20 @@ else{
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
            
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
+              <a class="nav-link" href="index.php">Home</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="shop.html">Shop</a>
-            </li>
-
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="#">Blog</a>
-            </li> -->
-
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
+              <a class="nav-link" href="shop.php">Shop</a>
             </li>
 
             <li class="nav-item">
-              <a href="cart.html" class="icon"><i class="fa-solid fa-bag-shopping"></i></a>
-              <a href="login.html" class="icon"><i class="fa-solid fa-user"></i></a>
+              <a class="nav-link" href="contact.php">Contact</a>
+            </li>
+
+            <li class="nav-item">
+              <a href="cart.php" class="icon"><i class="fa-solid fa-bag-shopping"></i></a>
+              <a href="login.php" class="icon"><i class="fa-solid fa-user"></i></a>
             </li>
             
           </ul>
@@ -70,19 +69,33 @@ else{
 
       <section class="single my-5 pt-5">
         <div class="row mt-5">
-            <div class="col-lg-5 col-md-6 col-sm-12">
-                <img class="img-fluid w-100 pb-2" src="assets/images/<?php echo $row['product_image'] ?>" alt="">
-            </div>
-                <?php while($row = $product->fetch_assoc()) {?>
-            <div class="col-lg-6 col-md-12 col-sm-12">
-              <?php ?>
-                <h4><?php echo $row['product_name'] ?></h4>
-                <h3 class="py-3">Price Rs <?php echo $row['product_price'] ?></h3>
-                <input type="number" value="1">
-                <button class="buy-btn">Add to cart</button>
-                <h4 class="mt-3 mb-3">DETAILS</h4>
-                <span><?php echo $row['product_description'] ?></span>
-            </div>
+           
+
+
+                <?php while($row = $product_re->fetch_assoc()) {?>
+
+                 
+                  <div style="height:500px; width:400px"><img style="" class="img-fluid w-100 pb-2" src="assets/images/<?php echo $row['product_image'];?>" alt=""></div>
+                        <div class="page col-lg-6 col-md-12 col-sm-12">
+                          
+                         
+                            <h4><?php echo $row['product_name'] ?></h4>
+                            <h3 class="py-3">Price Rs <?php echo $row['product_price'] ?></h3>
+
+
+                          <!-- post data to cart.php -->
+                            <form method="POST" action="cart.php">
+                                <input type="hidden" name="product_id" value="<?php echo $row['product_id']; ?>">
+                                <input type="hidden"  name="product_image" value="<?php echo $row['product_image']; ?>">
+                                <input type="hidden" name="product_name" value="<?php echo $row['product_name']; ?>">
+                                <input type="hidden" name="product_price" value="<?php echo $row['product_price']; ?>">
+                                <input type="number" name="quantity"  value="1">
+                                <button class="buy-btn" name="add_to_cart" type="submit">Add to cart</button>
+                            </form>
+                            <h4 class="mt-3 mb-3">DETAILS</h4>
+                            <span><?php echo $row['product_description'] ?></span>
+                        </div>
+                
             <?php } ?>
         </div>
       </section>
@@ -100,7 +113,7 @@ else{
     <footer class="mt-5 py-5">
         <div class="row">
                     <div class="footer-one col-lg-4 col-md-6 col-sm-12 px-5">
-                    <img class="logo" src="assets/images/mainlogo.png"/>
+                    <img class="logo" src="assets/images/samaan-logo.png"/>
                     <p class= "pt-3">Lorem ipsum dolor sit amet.</p>
                     </div>
         <div class="footer-one col-lg-4 col-md-6 col-sm-12">

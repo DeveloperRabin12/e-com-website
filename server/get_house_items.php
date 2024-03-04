@@ -2,7 +2,7 @@
 
 include('connection.php');
 
-$stmt= $conn->prepare("SELECT * from Products Where 'category'='houseitems' LIMIT 4");
+$stmt= $conn->prepare("SELECT * from Products Where product_category='houseitems' ");
 
 $stmt->execute();
 
